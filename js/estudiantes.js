@@ -1,19 +1,3 @@
-const listStudents=[]
-
-const loadStudents = async() => {
-    try{
-        listStudents.lenght=0;
-        const answer= await fetch('http://localhost:3000/alumnos')
-        if (!answer.ok){
-            throw new error('Error al cargar estudiantes', answer.status)
-        }
-        const students= await answer.json();
-        listStudents.push(...students);
-    }catch(error){
-        console.error("Error al cargar estudiantes", error.message);
-    }
-}
-
 const saveStudent= async(newStudent)=>{
     try{
         const answer=await fetch('http://localhost:3000/alumnos',{
@@ -35,30 +19,32 @@ const saveStudent= async(newStudent)=>{
 
 const loadPageStudents=()=>{
     const studentsPage = document.getElementById('page');
-    studentsPage.innerHTML = `
+    studentsPage.innerHTML= "";
+    const div = document.createElement("div");
+    div.classList.add("FormularioEstudiante")
+    div.innerHTML = `
     <form class="">
-      <div id="crearEsttudiante">
+      <div id="crearEstudiante">
         <h2>CREAR ESTUDIANTE</h2>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br>
-
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id" required><br>
-        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br>
-        <label for="tipoDocumento">Tipo de Documento:</label>
-        <select id="tipoDocumento" name="tipoDocumento" required>
+        <label for="nameStudent">Nombre:</label>
+        <input type="text" id="nameStudent" name="nombre" required><br>
+        <label for="idStudent">ID:</label>
+        <input type="text" id="idStudent" name="id" required><br>
+        <label for="birthdayStudent">Fecha de Nacimiento:</label>
+        <input type="date" id="birthdayStudent" name="fechaNacimiento" required><br>
+        <label for="documentStudent">Tipo de Documento:</label>
+        <select id="documentStudent" name="tipoDocumento" required>
             <option value="">Seleccione...</option>
-            <option value="cedula">Cédula</option>
+            <option value="cedula">C.C</option>
             <option value="pasaporte">Pasaporte</option>
-            <option value="otro">Otro</option>
+            <option value="otro">T.J</option>
         </select><br>
-        <label for="programaAcademico">Programa Académico:</label>
-        <select id="programaAcademico" name="programaAcademico" required>
-            <option value="">Seleccione...</option>
-            <option value="cedula">Cédula</option>
-            <option value="pasaporte">Pasaporte</option>
-            <option value="otro">Otro</option>
+
+
+        <label for="careerStudent">Programa Académico:</label>
+        <select id="careerStudent" name="programaAcademico" required>
+           
+
         </select><br>
         <label for="ciudad">Ciudad:</label>
         <select id="ciudad" name="ciudad" required>
@@ -105,4 +91,53 @@ const loadPageStudents=()=>{
       
     </form> 
   `;
+  studentsPage.appendChild(div)
+  careerOptions(listCareer);
 }
+
+const careerOptions = (listCareer) => {
+    const careerselect= document.getElementById("careerStudent")
+    careerselect.innerHTML="<option selected>Carreras...</option>";
+        listCareer.forEach(programas=>{
+            const optionElement= document.createElement('option')
+            optionElement.value = programas.id
+            optionElement.textContent = programas.nombre
+            careerselect.appendChild(optionElement)})
+}
+/*const createStudent= async ()=>{
+    const nameInput=document.getElementById('nameStudent');
+    const edadInput=document.getElementById('edadCliente');
+    const emailInput=document.getElementById('emailCliente');
+    const nombreInput=document.getElementById('nombreCliente');
+    const edadInput=document.getElementById('edadCliente');
+    const emailInput=document.getElementById('emailCliente');
+    const nombreInput=document.getElementById('nombreCliente');
+    const edadInput=document.getElementById('edadCliente');
+    const emailInput=document.getElementById('emailCliente');
+
+    const nameStudent=nombreInput.value;
+    const edad=edadInput.value;
+    const email=emailInput.value;
+
+    const nuevoCliente={
+        id:listaClientes.length+1,
+        nombre:nombre,
+        edad: edad,
+        email: email
+    }
+
+  
+    await guardarCliente(nuevoCliente);
+    await loadClientes();
+   
+    nombreInput.value='';
+    edadInput.value='';
+    emailInput.value='';
+
+    alert('Cliente creado con éxito!');
+    
+    actulizarClientesEnFacturas();
+
+    return nuevoCliente;
+
+}*/
