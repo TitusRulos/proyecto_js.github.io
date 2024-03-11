@@ -3,3 +3,9 @@
     margin: 0;
 }
 
+.custom-container {
+    background-color: #343a40;
+    border-radius: 20px;
+    color: #fff; 
+}
+
