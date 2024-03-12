@@ -152,7 +152,23 @@ const loadEnrolls = async() => {
 const originPage = () =>{
     const page = document.getElementById("page")
     page.innerHTML=`
-      <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg" alt="">` 
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+            <h1 class="display-4">¡Bienvenido a la Universidad de los Sabios!</h1>
+            <p class="lead">Donde el conocimiento y la sabiduría se encuentran.</p>
+            <div class="container">
+              <div class="row">
+                  <div class="col-md-6">
+                      <h2>Misión</h2>
+                      <p>Nuestra misión es proporcionar educación de alta calidad, fomentando el desarrollo integral de cada estudiante y preparándolos para enfrentar los desafíos del mundo moderno.</p>
+                  </div>
+                  <div class="col-md-6">
+                      <h2>Visión</h2>
+                      <p>Nuestra visión es ser reconocidos como una institución líder en la formación de profesionales altamente competentes y comprometidos con el progreso de la sociedad.</p>
+                  </div>
+              </div>
+          </div>
+    </div>` 
 }
 
 const populateCities = () => {

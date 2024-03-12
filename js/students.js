@@ -9,7 +9,7 @@ const loadPageStudents = () => {
     <div class="container custom-container">
         <div id="crearEstudiante">
             <h2 class="text-center">CREAR ESTUDIANTE</h2>
-            <form>
+            <form required>
                 <label for="nameStudent">Nombre:</label>
                 <input type="text" id="nameStudent" name="nombre" class="form-control mb-2" required>
                 
@@ -136,5 +136,5 @@ const createStudent = async () => {
     genderStudentInput.value = '';
     careerStudentInput.value = '';
 
-    alert('Cliente creado con éxito!');
+    alert('Estudiante creado con éxito!');
 }

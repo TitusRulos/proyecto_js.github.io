@@ -20,7 +20,7 @@ const loadPageEnrolls = () => {
                 <select id="idTermEnroll" name="term" class="form-control mb-2" required>
                 </select>
                 <label for="priceEnroll">Precio:</label>
-                <div id="priceEnroll" class="form-control mb-2" required></div>
+                <input type="number" id="priceEnroll" name="numeroDocumento" class="form-control mb-2" required>
                 
                 <input type="button" value="Crear Matrícula" onclick="createEnroll()" class="btn btn-primary btn-block mt-3">
             </form>

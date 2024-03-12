@@ -351,7 +351,15 @@
       "departamento_id": 1
     },
     {
-      "id": 32,
+      "id": "32",
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "departamento_id": 0
+    },
+    {
+      "id": 33,
       "nombre": "",
       "apellido": "",
       "tipo_documento": "",
@@ -1024,7 +1032,7 @@
       "programa_id": 3
     },
     {
-      "id": 52,
+      "id": "52",
       "nombre": "",
       "apellido": "",
       "tipo_documento": "",
@@ -1037,7 +1045,7 @@
       "programa_id": 0
     },
     {
-      "id": 53,
+      "id": "53",
       "nombre": "",
       "apellido": "",
       "tipo_documento": "",
@@ -1050,7 +1058,7 @@
       "programa_id": 0
     },
     {
-      "id": 54,
+      "id": "54",
       "nombre": "Juan",
       "apellido": "",
       "tipo_documento": "",
@@ -1063,7 +1071,7 @@
       "programa_id": 0
     },
     {
-      "id": 55,
+      "id": "55",
       "nombre": "",
       "apellido": "",
       "tipo_documento": "",
@@ -1076,7 +1084,72 @@
       "programa_id": 0
     },
     {
-      "id": 56,
+      "id": "56",
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 57,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 58,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 59,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 60,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 61,
       "nombre": "",
       "apellido": "",
       "tipo_documento": "",
@@ -2656,11 +2729,25 @@
       "precio": 1000
     },
     {
-      "id": 52,
+      "id": "52",
       "estudiante_id": 0,
       "asignatura_id": 0,
       "periodo_id": 0,
       "precio": null
+    },
+    {
+      "id": 53,
+      "estudiante_id": 4,
+      "asignatura_id": 1,
+      "periodo_id": 2,
+      "precio": 1231231
+    },
+    {
+      "id": 54,
+      "estudiante_id": 0,
+      "asignatura_id": 0,
+      "periodo_id": 0,
+      "precio": 0
     }
   ]
 }

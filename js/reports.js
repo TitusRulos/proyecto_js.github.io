@@ -245,7 +245,67 @@ const loadListEnrollsPage = async () => {
     }
 };
 
-  
+const loadInfo1 = async () => {
+    const teachersPage = document.getElementById('page');
+    teachersPage.innerHTML = "";
+
+    const div = document.createElement("div");
+    div.classList.add("FormularioProfesores");
+
+    div.innerHTML = `
+    <div class="container">
+    <h1 class="text-center">Total de Matrículas</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Trimestre 1</h5>
+                    <p class="card-text">Total: $500</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Trimestre 2</h5>
+                    <p class="card-text">Total: $600</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Trimestre 3</h5>
+                    <p class="card-text">Total: $700</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Trimestre 4</h5>
+                    <p class="card-text">Total: $800</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    `;
+}
+
+function calcularSumaMatriculas(){
+    let sumaPeriodo1 = 0;
+    let sumaPeriodo2 = 0;
+    for (let matricula of listEnroll) {
+        if(matricula.periodo_id == 1){
+            sumaPeriodo1 += matricula.precio;
+        }
+        if (matricula.periodo_id == 2){
+            sumaPeriodo2 += matricula.precio 
+        }
+    }
+    return sumaPeriodo1, sumaPeriodo2;
+}
   
   
   
