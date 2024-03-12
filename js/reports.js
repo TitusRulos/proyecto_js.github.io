@@ -129,7 +129,7 @@ const loadListSubjectsPage = async () => {
 
     const searchSubjectByName = (subjectsArray, name) => {
         return subjectsArray.filter(subject =>
-            subject.nombre.toLowerCase().includes(name.toLowerCase())
+            subject.codigo.toLowerCase().includes(name.toLowerCase())
         );
     };
 
@@ -145,7 +145,7 @@ const loadListSubjectsPage = async () => {
             results.forEach(result => {
                 const listItem = document.createElement("li");
                 listItem.classList.add("list-group-item");
-                listItem.textContent = `ID: ${result.id} | Curso: ${getNameById(listCourse, result.curso_id)} (ID:${result.curso_id}) | Código: ${result.codigo} | Guía de cátedra: ${result.guia_catedra}`;
+                listItem.textContent = `ID: ${result.id} | Curso: ${getNameById(listCourse, result.curso_id)} (ID:${result.curso_id}) | Código: ${result.codigo}`;
                 subjectsList.appendChild(listItem);
             });
         };
@@ -169,7 +169,7 @@ const loadListSubjectsPage = async () => {
         subjectsData.forEach(subject => {
             const listItem = document.createElement("li");
             listItem.classList.add("list-group-item");
-            listItem.textContent = `ID: ${subject.id} | Nombre: ${subject.nombre} | Código: ${subject.codigo} | Guía de cátedra: ${subject.guia_catedra}`;
+            listItem.textContent = `ID: ${subject.id} | Curso: ${getNameById(listCourse, subject.curso_id)} (ID:${subject.curso_id}) | Código: ${subject.codigo} | Créditos: ${subject.creditos} | Profesor: ${getNameById(listTeachers, subject.profesor_id)} (ID:${subject.profesor_id}) | Cupos: ${subject.cupos_disponibles} | Programa: ${getNameById(listCareer, subject.programa_id)} (ID:${subject.programa_id}) | Horario: Día ${subject.horario_clases.dia}, Hora ${subject.horario_clases.hora}, Salón ${getNameById(listClassrooms, subject.horario_clases.salon_id)}`;
             subjectsList.appendChild(listItem);
         });
 
@@ -180,78 +180,71 @@ const loadListSubjectsPage = async () => {
     }
 };
 
-
-const loadList = async () => {
-    const listStudentsPage = document.getElementById('page');
-    listStudentsPage.innerHTML = "";
+const loadListEnrollsPage = async () => {
+    const enrollsPage = document.getElementById('page');
+    enrollsPage.innerHTML = "";
 
     const div = document.createElement("div");
-    div.classList.add("ListaEstudiantes");
+    div.classList.add("ListaMatriculas");
 
-    // Función para buscar estudiantes por nombre
-    const searchStudentByName = (studentsArray, name) => {
-        return studentsArray.filter(student =>
-            student.nombre.toLowerCase().includes(name.toLowerCase()) ||
-            student.apellido.toLowerCase().includes(name.toLowerCase())
+    const searchStudentNameById = (studentId) => {
+        const student = listStudents.find(student => student.id === studentId);
+        return student ? student.name : "";
+    };
+
+    const searchEnrollByStudent = (enrollsArray, studentName) => {
+        return enrollsArray.filter(enroll =>
+            searchStudentNameById(enroll.estudiante_id).toLowerCase().includes(studentName.toLowerCase())
         );
     };
 
     try {
-        const response = await fetch('http://localhost:3000/alumnos');
-        const studentsData = await response.json();
+        const response = await fetch('http://localhost:3000/matriculas');
+        const enrollsData = await response.json();
 
-        const studentsList = document.createElement("ul");
-        studentsList.classList.add("list-group");
+        const enrollsList = document.createElement("ul");
+        enrollsList.classList.add("list-group");
 
-        // Función para mostrar los resultados de la búsqueda
         const showSearchResults = (results) => {
-            studentsList.innerHTML = ''; // Limpiar resultados anteriores
+            enrollsList.innerHTML = '';
             results.forEach(result => {
                 const listItem = document.createElement("li");
                 listItem.classList.add("list-group-item");
-                listItem.textContent = `ID: ${result.id} | Nombre: ${result.nombre} ${result.apellido} | Tipo de documento ${result.tipo_documento} | Número de documento ${result.numero_documento} | Ciudad: ${result.ciudad_residencia} | Direccion: ${result.direccion} | Telefono: ${result.telefono} | Fecha de nacimiento: ${result.fecha_nacimiento} | Sexo: ${result.sexo} | Programa: ${getNameById(listCareer,result.programa_id)} (ID:${result.programa_id})`;
-                studentsList.appendChild(listItem);
+                listItem.textContent = `ID: ${result.id} | Estudiante: ${getNameById(listStudents, result.estudiante_id)} (ID:${result.estudiante_id}) | Asignatura: ${getNameById(listSubject, result.asignatura_id)} (ID:${result.asignatura_id}) | Periodo: ${getNameById(listTerms, result.periodo_id)} (ID:${result.periodo_id}) | Precio: ${result.precio}`;
+                enrollsList.appendChild(listItem);
             });
         };
 
-        // Obtener referencia al elemento de entrada de búsqueda
         const searchInput = document.createElement("input");
         searchInput.setAttribute("type", "text");
         searchInput.setAttribute("id", "searchInput");
-        searchInput.setAttribute("placeholder", "Buscar por nombre...");
+        searchInput.setAttribute("placeholder", "Buscar por nombre de estudiante...");
         div.appendChild(searchInput);
 
-        // Agregar evento de escucha para la entrada de búsqueda
         searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.trim(); // Obtener el término de búsqueda
+            const searchTerm = searchInput.value.trim();
             if (searchTerm.length === 0) {
-                showSearchResults(studentsData); // Si no hay término de búsqueda, mostrar todos los estudiantes
+                showSearchResults(enrollsData); 
             } else {
-                const searchResults = searchStudentByName(studentsData, searchTerm); // Realizar la búsqueda
-                showSearchResults(searchResults); // Mostrar los resultados de la búsqueda
+                const searchResults = searchEnrollByStudent(enrollsData, searchTerm); 
+                showSearchResults(searchResults); 
             }
         });
 
-        studentsData.forEach(student => {
+        enrollsData.forEach(enroll => {
             const listItem = document.createElement("li");
             listItem.classList.add("list-group-item");
-            listItem.textContent = `ID: ${student.id} | Nombre: ${student.nombre} ${student.apellido} | Tipo de documento ${student.tipo_documento} | Número de documento ${student.numero_documento} | Ciudad: ${student.ciudad_residencia} | Direccion: ${student.direccion} | Telefono: ${student.telefono} | Fecha de nacimiento: ${student.fecha_nacimiento} | Sexo: ${student.sexo} | Programa: ${getNameById(listCareer,student.programa_id)} (ID:${student.programa_id})`;
-            studentsList.appendChild(listItem);
+            listItem.textContent = `ID: ${enroll.id} | Estudiante: ${getNameById(listStudents, Number(enroll.estudiante_id))} (ID:${enroll.estudiante_id}) | Asignatura: ${getNameById(listSubject, enroll.asignatura_id)} (ID:${enroll.asignatura_id}) | Periodo: ${getNameById(listTerms, enroll.periodo_id)} (ID:${enroll.periodo_id}) | Precio: ${enroll.precio}`;
+            enrollsList.appendChild(listItem);
         });
 
-        div.appendChild(studentsList);
-        listStudentsPage.appendChild(div);
+        div.appendChild(enrollsList);
+        enrollsPage.appendChild(div);
     } catch (error) {
-        console.error("Error al cargar la lista de estudiantes:", error);
+        console.error("Error al cargar la lista de matrículas:", error);
     }
 };
 
-
-  
-  
-  
-  
-  
   
   
   

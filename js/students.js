@@ -74,7 +74,7 @@ const saveStudent = async (nuevoEstudiante) => {
         });
 
         if (!respuesta.ok) {
-            throw new Error('Error al crear el Estudiante. Estado: ', respuesta.status);
+            throw new error('Error al crear el Estudiante. Estado: ', respuesta.status);
         }
 
         const EstudianteCreado = await respuesta.json();

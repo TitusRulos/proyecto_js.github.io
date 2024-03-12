@@ -45,7 +45,7 @@ const saveTeacher = async (newTeacher) => {
         });
 
         if (!respuesta.ok) {
-            throw new Error('Error al crear el Profesor. Estado: ', respuesta.status);
+            throw new error('Error al crear el Profesor. Estado: ', respuesta.status);
         }
 
         const TeacherCreado = await respuesta.json();

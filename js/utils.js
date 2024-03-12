@@ -204,7 +204,18 @@ const createOptionsFromArrayPersons = (array, id) => {
 
 const getNameById = (array, id) => {
     const foundItem = array.find(item => item.id == id);
-    return foundItem ? foundItem.nombre : null;
+    return foundItem ? foundItem.nombre || foundItem.codigo || foundItem.numero_identificacion : null;
+};
+
+const getProgramAndCreditsById = (subjectId) => {
+    const subject = listSubject.find(item => item.id === subjectId);
+    if (subject) {
+        const programId = subject.programa_id;
+        const credits = subject.creditos;
+        const tarifa = listFee.find(precio => precio.programa_id)
+    } else {
+        return null;
+    }
 };
 
 

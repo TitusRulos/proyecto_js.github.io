@@ -343,12 +343,20 @@
       "departamento_id": 5
     },
     {
-      "id": 31,
+      "id": "31",
       "nombre": "Petro",
       "apellido": "Uribe",
       "tipo_documento": "C.C",
       "numero_documento": "13123",
       "departamento_id": 1
+    },
+    {
+      "id": 32,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "departamento_id": 0
     }
   ],
   "alumnos": [
@@ -1003,7 +1011,7 @@
       "programa_id": 10
     },
     {
-      "id": 51,
+      "id": "51",
       "nombre": "Juan",
       "apellido": "Tinoco",
       "tipo_documento": "C.C",
@@ -1014,6 +1022,71 @@
       "fecha_nacimiento": "2003-02-02",
       "sexo": "masculino",
       "programa_id": 3
+    },
+    {
+      "id": 52,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 53,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 54,
+      "nombre": "Juan",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 55,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
+    },
+    {
+      "id": 56,
+      "nombre": "",
+      "apellido": "",
+      "tipo_documento": "",
+      "numero_documento": "",
+      "ciudad_residencia": "",
+      "direccion": "",
+      "telefono": "",
+      "fecha_nacimiento": "",
+      "sexo": "",
+      "programa_id": 0
     }
   ],
   "cursos": [
@@ -2182,7 +2255,7 @@
       }
     },
     {
-      "id": 61,
+      "id": "61",
       "curso_id": 1,
       "codigo": "PRO-X-123",
       "creditos": 3,
@@ -2196,7 +2269,7 @@
       }
     },
     {
-      "id": 62,
+      "id": "62",
       "curso_id": 5,
       "codigo": "123123",
       "creditos": 1231,
@@ -2210,7 +2283,7 @@
       }
     },
     {
-      "id": 63,
+      "id": "63",
       "curso_id": 3,
       "codigo": "123123",
       "creditos": 132,
@@ -2576,11 +2649,18 @@
       "precio": 5300
     },
     {
-      "id": 51,
+      "id": "51",
       "estudiante_id": 1,
       "asignatura_id": 3,
       "periodo_id": 2,
       "precio": 1000
+    },
+    {
+      "id": 52,
+      "estudiante_id": 0,
+      "asignatura_id": 0,
+      "periodo_id": 0,
+      "precio": null
     }
   ]
 }
