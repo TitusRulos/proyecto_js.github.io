@@ -365,6 +365,14 @@
       "tipo_documento": "",
       "numero_documento": "",
       "departamento_id": 0
+    },
+    {
+      "id": 34,
+      "nombre": "Pedro",
+      "apellido": "Fuentes",
+      "tipo_documento": "C.C",
+      "numero_documento": "123123",
+      "departamento_id": 1
     }
   ],
   "alumnos": [
@@ -1160,6 +1168,19 @@
       "fecha_nacimiento": "",
       "sexo": "",
       "programa_id": 0
+    },
+    {
+      "id": 62,
+      "nombre": "José",
+      "apellido": "Ardila",
+      "tipo_documento": "C.C",
+      "numero_documento": "123123123",
+      "ciudad_residencia": "Ibagué",
+      "direccion": "13213",
+      "telefono": "123123",
+      "fecha_nacimiento": "2024-02-28",
+      "sexo": "masculino",
+      "programa_id": 7
     }
   ],
   "cursos": [
@@ -2368,6 +2389,20 @@
         "hora": "08:00-10:00",
         "salon_id": 2
       }
+    },
+    {
+      "id": 64,
+      "curso_id": 1,
+      "codigo": "12313",
+      "creditos": 12,
+      "profesor_id": 13,
+      "cupos_disponibles": 121,
+      "programa_id": 2,
+      "horario_clases": {
+        "dia": "Viernes",
+        "hora": "18:00-20:00",
+        "salon_id": 15
+      }
     }
   ],
   "matriculas": [
@@ -2729,25 +2764,11 @@
       "precio": 1000
     },
     {
-      "id": "52",
-      "estudiante_id": 0,
-      "asignatura_id": 0,
-      "periodo_id": 0,
-      "precio": null
-    },
-    {
-      "id": 53,
-      "estudiante_id": 4,
+      "id": 52,
+      "estudiante_id": 3,
       "asignatura_id": 1,
-      "periodo_id": 2,
-      "precio": 1231231
-    },
-    {
-      "id": 54,
-      "estudiante_id": 0,
-      "asignatura_id": 0,
-      "periodo_id": 0,
-      "precio": 0
+      "periodo_id": 1,
+      "precio": 10000
     }
   ]
 }

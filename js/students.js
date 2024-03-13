@@ -9,7 +9,7 @@ const loadPageStudents = () => {
     <div class="container custom-container">
         <div id="crearEstudiante">
             <h2 class="text-center">CREAR ESTUDIANTE</h2>
-            <form required>
+            <form onsubmit="return createStudent()">
                 <label for="nameStudent">Nombre:</label>
                 <input type="text" id="nameStudent" name="nombre" class="form-control mb-2" required>
                 
@@ -53,7 +53,7 @@ const loadPageStudents = () => {
                 <select id="careerStudent" name="programaAcademico" class="form-control mb-2" required>
                 </select>
                 
-                <input type="button" value="Crear Estudiante" onclick="createStudent()" class="btn btn-primary btn-block mt-3">
+                <input type="submit" value="Crear Estudiante" class="btn btn-primary btn-block mt-3">
             </form>
         </div>
     </div>
@@ -125,6 +125,8 @@ const createStudent = async () => {
     await saveStudent(newStudent);
     await loadStudents();
 
+    alert('Estudiante creado con éxito!');
+
     nameStudentInput.value = '';
     lastnameStudentInput.value = '';
     tipeDocumentStudentInput.value = '';
@@ -136,5 +138,5 @@ const createStudent = async () => {
     genderStudentInput.value = '';
     careerStudentInput.value = '';
 
-    alert('Estudiante creado con éxito!');
+   
 }

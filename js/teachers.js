@@ -9,7 +9,7 @@ const loadPageTeachers = () => {
     <div class="container custom-container">
         <div id="crearProfesor">
             <h2 class="text-center">CREAR PROFESOR</h2>
-            <form>
+            <form onsubmit = "return createTeacher()">
                 <label for="nameTeachers">Nombre:</label>
                 <input type="text" id="nameTeachers" name="nombre" class="form-control mb-2" required>
                 <label for="lastnameTeachers">Apellido:</label>
@@ -25,7 +25,7 @@ const loadPageTeachers = () => {
                 <label for="departamentTeacher">Departamento:</label>
                 <select id="departamentTeacher" name="programaAcademico" class="form-control mb-2" required>
                 </select>
-                <input type="button" value="Crear Profesor" onclick="createTeacher()" class="btn btn-primary btn-block mt-3">
+                <input type="submit" value="Crear Profesor" class="btn btn-primary btn-block mt-3">
             </form>
         </div>
     </div>

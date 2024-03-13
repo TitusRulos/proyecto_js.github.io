@@ -9,7 +9,7 @@ const loadPageSubjects = () => {
     <div class="container custom-container">
         <div id="crearAsignatura">
             <h2 class="text-center">CREAR ASIGNATURA</h2>
-            <form>
+            <form onsubmit = "return createSubject()">
                 <label for="courseSubject">Curso:</label>
                 <select id="courseSubject" name="curso" class="form-control mb-2" required>
                 </select>
@@ -59,7 +59,7 @@ const loadPageSubjects = () => {
                         
                     </select>
                 </div>
-                <input type="button" value="Crear Asignatura" onclick="createSubject()" class="btn btn-primary btn-block mt-3">
+                <input type="submit" value="Crear Asignatura" class="btn btn-primary btn-block mt-3">
             </form>
         </div>
     </div>

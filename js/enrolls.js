@@ -9,7 +9,7 @@ const loadPageEnrolls = () => {
     <div class="container custom-container">
         <div id="crearMatricula">
             <h2 class="text-center">CREAR MATRÍCULA</h2>
-            <form>
+            <form onsubmit = "return createEnroll()">
                 <label for="idStudentEnroll">Estudiante:</label>
                 <select id="idStudentEnroll" name="student" class="form-control mb-2" required>
                 </select>
@@ -22,7 +22,7 @@ const loadPageEnrolls = () => {
                 <label for="priceEnroll">Precio:</label>
                 <input type="number" id="priceEnroll" name="numeroDocumento" class="form-control mb-2" required>
                 
-                <input type="button" value="Crear Matrícula" onclick="createEnroll()" class="btn btn-primary btn-block mt-3">
+                <input type="submit" value="Crear Matrícula" class="btn btn-primary btn-block mt-3">
             </form>
         </div>
     </div>

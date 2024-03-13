@@ -246,67 +246,130 @@ const loadListEnrollsPage = async () => {
 };
 
 const loadInfo1 = async () => {
-    const teachersPage = document.getElementById('page');
-    teachersPage.innerHTML = "";
+    const enrollsPage = document.getElementById('page');
+    enrollsPage.innerHTML = "";
 
     const div = document.createElement("div");
-    div.classList.add("FormularioProfesores");
+    div.classList.add("ListaMatriculas");
 
-    div.innerHTML = `
-    <div class="container">
-    <h1 class="text-center">Total de Matrículas</h1>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Trimestre 1</h5>
-                    <p class="card-text">Total: $500</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Trimestre 2</h5>
-                    <p class="card-text">Total: $600</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Trimestre 3</h5>
-                    <p class="card-text">Total: $700</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Trimestre 4</h5>
-                    <p class="card-text">Total: $800</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    `;
-}
+    try {
+        const response = await fetch('http://localhost:3000/matriculas');
+        const enrollsData = await response.json();
 
-function calcularSumaMatriculas(){
-    let sumaPeriodo1 = 0;
-    let sumaPeriodo2 = 0;
-    for (let matricula of listEnroll) {
-        if(matricula.periodo_id == 1){
-            sumaPeriodo1 += matricula.precio;
+        const totalByPeriod = {};
+
+        enrollsData.forEach(enroll => {
+            if (enroll.periodo_id === 0) {
+                return;
+            }
+            
+            if (!totalByPeriod[enroll.periodo_id]) {
+                totalByPeriod[enroll.periodo_id] = 0;
+            }
+            totalByPeriod[enroll.periodo_id] += enroll.precio;
+        });
+
+        for (const periodoId in totalByPeriod) {
+            div.innerHTML += `<p>Total de matrículas para el periodo ${getNameById(listTerms, periodoId)} (ID: ${periodoId}): ${totalByPeriod[periodoId]}</p>`;
         }
-        if (matricula.periodo_id == 2){
-            sumaPeriodo2 += matricula.precio 
-        }
+
+        enrollsPage.appendChild(div);
+    } catch (error) {
+        console.error("Error al cargar la lista de matrículas:", error);
     }
-    return sumaPeriodo1, sumaPeriodo2;
-}
-  
-  
-  
-  
+};
+
+const getMostEnrolledSubjects = async () => {
+    try {
+        const response = await fetch('http://localhost:3000/matriculas');
+        const enrollsData = await response.json();
+
+        const enrollCounts = {};
+        enrollsData.forEach(enroll => {
+            const subjectId = enroll.asignatura_id;
+            if (!enrollCounts[subjectId]) {
+                enrollCounts[subjectId] = 0;
+            }
+            enrollCounts[subjectId]++;
+        });
+
+        const sortedEnrollCounts = Object.entries(enrollCounts).sort((a, b) => b[1] - a[1]);
+
+        const resultList = document.createElement('ul');
+        sortedEnrollCounts.forEach(([subjectId, count]) => {
+            const subjectName = getNameById(listSubject, subjectId);
+            const listItem = document.createElement('li');
+            listItem.textContent = `${subjectName} (${subjectId}): ${count} matrículas`;
+            resultList.appendChild(listItem);
+        });
+
+        const resultContainer = document.getElementById('page');
+        resultContainer.innerHTML = '';
+        resultContainer.appendChild(resultList);
+
+    } catch (error) {
+        console.error("Error al cargar la lista de matrículas:", error);
+    }
+};
+
+const generateStudySchedule = async (studentId) => {
+    try {
+        // Obtener las matrículas del alumno
+        const response = await fetch('http://localhost:3000/matriculas');
+        const enrollsData = await response.json();
+        const studentEnrolls = enrollsData.filter(enroll => enroll.estudiante_id === studentId);
+
+        // Calcular el total de horas de clase por semana para cada asignatura
+        const hoursPerSubject = {};
+        studentEnrolls.forEach(enroll => {
+            const subjectId = enroll.asignatura_id;
+            const subject = listSubjects.find(subject => subject.id === subjectId);
+            const totalHours = subject.horario_clases.reduce((acc, curr) => {
+                const startTime = new Date(`2024-01-01T${curr.hora_inicio}`);
+                const endTime = new Date(`2024-01-01T${curr.hora_fin}`);
+                const diffMs = endTime - startTime;
+                const diffHours = diffMs / (1000 * 60 * 60);
+                return acc + diffHours;
+            }, 0);
+            if (!hoursPerSubject[subjectId]) {
+                hoursPerSubject[subjectId] = 0;
+            }
+            hoursPerSubject[subjectId] += totalHours;
+        });
+
+        // Distribuir las horas de estudio a lo largo de los días de la semana
+        const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+        const studySchedule = {};
+        Object.keys(hoursPerSubject).forEach(subjectId => {
+            const totalHours = hoursPerSubject[subjectId];
+            const hoursPerDay = Math.ceil(totalHours / 5); // Distribuir equitativamente en 5 días laborables
+            const subjectName = listSubjects.find(subject => subject.id === subjectId).nombre;
+            studySchedule[subjectName] = [];
+            daysOfWeek.forEach((day, index) => {
+                const hoursToAdd = (index < 5) ? hoursPerDay : 0; // No estudiar durante el fin de semana
+                studySchedule[subjectName].push({ day, hours: hoursToAdd });
+            });
+        });
+
+        // Generar el HTML del horario de estudio
+        let scheduleHTML = '<h2>Horario de Estudio</h2>';
+        Object.entries(studySchedule).forEach(([subjectName, schedule]) => {
+            scheduleHTML += `<h3>${subjectName}</h3><ul>`;
+            schedule.forEach(({ day, hours }) => {
+                scheduleHTML += `<li>${day}: ${hours} horas</li>`;
+            });
+            scheduleHTML += '</ul>';
+        });
+
+        // Mostrar el horario de estudio en el contenedor especificado
+        document.getElementById('studySchedule').innerHTML = scheduleHTML;
+
+    } catch (error) {
+        console.error("Error al generar el horario de estudio:", error);
+    }
+};
+
+
+
+
+
